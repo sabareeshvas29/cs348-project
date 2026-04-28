@@ -10,15 +10,15 @@ class Team(db.Model):
 
 class Player(db.Model):
         __tablename__ = 'players'
-        player_id = db.Column(db.Integer, primary_key=True)
-        player_name = db.Column(db.String(100), nullable=False)
+        player_id = db.Column(db.Integer, primary_key=True, index=True)
+        player_name = db.Column(db.String(100), nullable=False, index=True)
         team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))
         jersey_num = db.Column(db.Integer, nullable=False)
         position = db.Column(db.String(100), nullable=False)
 
 class Game(db.Model):
          __tablename__ = 'games'
-         game_id = db.Column(db.Integer, primary_key=True)
+         game_id = db.Column(db.Integer, primary_key=True, index=True)
          game_date = db.Column(db.Date,  nullable=False)
          location = db.Column(db.String(100), nullable=False)
          home_team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))

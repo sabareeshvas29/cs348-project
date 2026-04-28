@@ -27,8 +27,8 @@ class Game(db.Model):
 class PlayerGameStats(db.Model):
         __tablename__ = 'player_game_stats'
         stat_id = db.Column(db.Integer, primary_key=True)
-        player_id = db.Column(db.Integer, db.ForeignKey('players.player_id'))
-        game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
+        player_id = db.Column(db.Integer, db.ForeignKey('players.player_id'), index=True)
+        game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'), index=True)
         points = db.Column(db.Integer, nullable=False)
         rebounds = db.Column(db.Integer, nullable=False)
         assists = db.Column(db.Integer, nullable=False)

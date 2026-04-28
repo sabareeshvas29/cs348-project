@@ -18,6 +18,11 @@ def index():
 def stats():
     if request.method == 'POST':
 
+        numeric_fields = ['points', 'rebounds', 'assists', 'steals', 'blocks', 'fouls', 'mins_played']
+        for field in numeric_fields:
+            if not request.form[field].isdigit():
+                return f"Invalid input for {field}", 400
+
         player_id = request.form['player_id']
         game_id = request.form['game_id']
         points = request.form['points']
@@ -33,6 +38,7 @@ def stats():
                                    mins_played = mins_played )
         
         db.session.add(new_stat)
+        db.session.execute(db.text('PRAGMA read_uncommitted = OFF'))
         db.session.commit()
         return redirect('/stats')
 
@@ -94,6 +100,10 @@ def edit_stat(stat_id):
     stat = PlayerGameStats.query.get(stat_id)
 
     if request.method == 'POST':
+        numeric_fields = ['points', 'rebounds', 'assists', 'steals', 'blocks', 'fouls', 'mins_played']
+        for field in numeric_fields:
+            if not request.form[field].isdigit():
+                return f"Invalid input for {field}", 400
         stat.player_id = request.form['player_id']
         stat.game_id = request.form['game_id']
         stat.points = request.form['points']
@@ -104,6 +114,7 @@ def edit_stat(stat_id):
         stat.fouls = request.form['fouls']
         stat.mins_played = request.form['mins_played']
 
+        db.session.execute(db.text('PRAGMA read_uncommitted = OFF'))
         db.session.commit()
         return redirect('/stats')
 

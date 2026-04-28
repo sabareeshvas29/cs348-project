@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head><title>Report</title></head>
+<body>
+    <h1>Stats Report</h1>
+    <a href="/">Home</a>
+
+    <form method="POST" action="/report">
+        <select name="player_id">
+            <option value="">All Players</option>
+            {% for player in players %}
+                <option value="{{ player.player_id }}">{{ player.player_name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="min_points" placeholder="Min Points">
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <h2>Results</h2>
+    <table border="1">
+        <tr>
+            <th>Player</th>
+            <th>Points</th>
+            <th>Rebounds</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>Fouls</th>
+            <th>Mins</th>
+        </tr>
+        {% for stat in results %}
+        <tr>
+            <td>{{ stat.player.player_name }}</td>
+            <td>{{ stat.points }}</td>
+            <td>{{ stat.rebounds }}</td>
+            <td>{{ stat.assists }}</td>
+            <td>{{ stat.steals }}</td>
+            <td>{{ stat.blocks }}</td>
+            <td>{{ stat.fouls }}</td>
+            <td>{{ stat.mins_played }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

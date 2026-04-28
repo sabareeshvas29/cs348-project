@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Stat</title>
+</head>
+<body>
+    <h1>Edit Stat Line</h1>
+    <a href="/stats">Back</a>
+
+    <form method="POST" action="/edit/{{ stat.stat_id }}">
+        <select name="player_id">
+            {% for player in players %}
+                <option value="{{ player.player_id }}" {% if player.player_id == stat.player_id %}selected{% endif %}>
+                    {{ player.player_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select name="game_id">
+            {% for game in games %}
+                <option value="{{ game.game_id }}" {% if game.game_id == stat.game_id %}selected{% endif %}>
+                    {{ game.game_date }} - {{ game.location }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="points" value="{{ stat.points }}" required>
+        <input type="number" name="rebounds" value="{{ stat.rebounds }}" required>
+        <input type="number" name="assists" value="{{ stat.assists }}" required>
+        <input type="number" name="steals" value="{{ stat.steals }}" required>
+        <input type="number" name="blocks" value="{{ stat.blocks }}" required>
+        <input type="number" name="fouls" value="{{ stat.fouls }}" required>
+        <input type="number" name="mins_played" value="{{ stat.mins_played }}" required>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Stats</title>
+</head>
+<body>
+    <h1>Player Game Stats</h1>
+    <a href="/">Home</a>
+
+    <h2>Add Stat Line</h2>
+    <form method="POST" action="/stats">
+        <select name="player_id">
+            {% for player in players %}
+                <option value="{{ player.player_id }}">{{ player.player_name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="game_id">
+            {% for game in games %}
+                <option value="{{ game.game_id }}">{{ game.game_date }} - {{ game.location }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="points" placeholder="Points" required>
+        <input type="number" name="rebounds" placeholder="Rebounds" required>
+        <input type="number" name="assists" placeholder="Assists" required>
+        <input type="number" name="steals" placeholder="Steals" required>
+        <input type="number" name="blocks" placeholder="Blocks" required>
+        <input type="number" name="fouls" placeholder="Fouls" required>
+        <input type="number" name="mins_played" placeholder="Minutes Played" required>
+
+        <button type="submit">Add Stat</button>
+    </form>
+
+    <h2>All Stats</h2>
+    <table border="1">
+        <tr>
+            <th>Player</th>
+            <th>Game</th>
+            <th>Points</th>
+            <th>Rebounds</th>
+            <th>Assists</th>
+            <th>Steals</th>
+            <th>Blocks</th>
+            <th>Fouls</th>
+            <th>Mins</th>
+            <th>Actions</th>
+        </tr>
+        {% for stat in stats %}
+        <tr>
+            <td>{{ stat.player.player_name }}</td>
+            <td>{{ stat.game.game_date }} - {{ stat.game.location }}</td>
+            <td>{{ stat.points }}</td>
+            <td>{{ stat.rebounds }}</td>
+            <td>{{ stat.assists }}</td>
+            <td>{{ stat.steals }}</td>
+            <td>{{ stat.blocks }}</td>
+            <td>{{ stat.fouls }}</td>
+            <td>{{ stat.mins_played }}</td>
+            <td>
+                <a href="/edit/{{ stat.stat_id }}">Edit</a>
+                <a href="/delete/{{ stat.stat_id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

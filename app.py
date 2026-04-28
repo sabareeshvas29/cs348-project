@@ -162,7 +162,7 @@ def seed():
         PlayerGameStats(player_id=curry.player_id, game_id=game2.game_id, points=34, rebounds=7, assists=7, steals=2, blocks=0, fouls=2, mins_played=40),
         PlayerGameStats(player_id=klay.player_id, game_id=game2.game_id, points=25, rebounds=4, assists=1, steals=0, blocks=1, fouls=3, mins_played=37),
         PlayerGameStats(player_id=lebron.player_id, game_id=game3.game_id, points=38, rebounds=8, assists=9, steals=1, blocks=1, fouls=2, mins_played=39),
-        PlayerGameStats(player_id=curry.player_id, game_id=game3.game_id, points=27, rebounds=5, assists=6, steals=3, blocks=0, fouls=1, mins_played=38),
+        PlayerGameStats(player_id=curry.player_id, game_id=game3.game_id, points=27, rdebounds=5, assists=6, steals=3, blocks=0, fouls=1, mins_played=38),
     ])
     db.session.commit()
 
@@ -170,6 +170,9 @@ def seed():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
+
     
 
